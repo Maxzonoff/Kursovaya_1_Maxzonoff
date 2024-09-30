@@ -3,7 +3,7 @@ import datetime
 import pytest
 
 from src import utils
-from src.utils import transactions_total_sum, read_excel
+from src.utils import read_excel, transactions_total_sum
 
 
 def test_convert_to_datetime():
@@ -90,7 +90,9 @@ def test_greeting_by_time_night(time):
 
 
 def test_transactions_total_sum():
-    assert transactions_total_sum(read_excel('../tests/test_files/test_data.xlsx')) == [
-        {'last_digits': '*7197', 'total_spent': -428, 'cashback': 0},
-        {'last_digits': '*5091', 'total_spent': -564, 'cashback': 0},
-        {'last_digits': '*4556', 'total_spent': 177635, 'cashback': 70.0}]
+    result = [
+        {"last_digits": "*7197", "total_spent": -428, "cashback": 0},
+        {"last_digits": "*5091", "total_spent": -564, "cashback": 0},
+        {"last_digits": "*4556", "total_spent": 177635, "cashback": 70.0},
+    ]
+    assert transactions_total_sum(read_excel("test_files/test_data.xlsx")) == result
