@@ -96,3 +96,34 @@ def test_transactions_total_sum():
         {"last_digits": "*4556", "total_spent": 177635, "cashback": 70.0},
     ]
     assert transactions_total_sum(read_excel("test_files/test_data.xlsx")) == result
+
+
+def test_transactions_total_sum_bad_path():
+    with pytest.raises(FileNotFoundError) as f:
+        transactions_total_sum(read_excel("test"))
+        assert str(f.value) == 'FileNotFoundError'
+
+
+def test_read_excel_empty():
+    assert read_excel('test_files/empty.xlsx') == []
+
+
+def test_read_excel_good():
+    assert (read_excel('test_files/empty.xlsx') ==
+            [
+                {
+                    'operation_date': datetime.datetime(2021, 12, 31, 16, 44),
+                    'card_num': '*7197',
+                    'state': 'OK',
+                    'sum_pay': -160.89,
+                    'cash_back': 0,
+                    'category': 'Супермаркеты',
+                    'description': 'Колхоз',
+                }
+            ])
+
+
+def test_read_is_not_excel():
+    with pytest.raises(FileNotFoundError) as f:
+        transactions_total_sum(read_excel('test_files/operations.json'))
+        assert str(f.value) == 'AssertionError'
