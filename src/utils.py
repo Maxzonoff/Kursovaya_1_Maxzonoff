@@ -58,7 +58,7 @@ def read_excel(file_path: str) -> list[dict]:
     return transactions
 
 
-print(read_excel('../data/operations.json'))
+# print(read_excel('../data/operations.json'))
 
 
 def transactions_total_sum(transactions: list[dict]) -> list[dict]:

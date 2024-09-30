@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15caf5a9-f705-44a7-8889-98d1534162f3" name="Changes" comment="'test_transactions_total_sum'">
+    <list default="true" id="15caf5a9-f705-44a7-8889-98d1534162f3" name="Changes" comment="'тесты для read_excel'">
+      <change afterPath="$PROJECT_DIR$/tests/test_files/empty.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_files/good.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_files/operations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
@@ -54,6 +57,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_utils.test_read_is_not_excel.executor": "Run",
     "Python tests.Python tests for test_utils.test_transactions_total_sum.executor": "Run",
     "Python tests.Python tests for test_utils.test_transactions_total_sum_empty.executor": "Run",
     "Python tests.Python tests for test_views.test_main_page.executor": "Run",
@@ -73,6 +77,21 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="Python tests for test_utils.test_read_is_not_excel" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Kursovaya_1_Maxzonoff" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_utils.test_read_is_not_excel&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_utils.test_transactions_total_sum" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Kursovaya_1_Maxzonoff" />
       <option name="ENV_FILES" value="" />
@@ -120,6 +139,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_utils.test_read_is_not_excel" />
         <item itemvalue="Python tests.Python tests for test_utils.test_transactions_total_sum_empty" />
         <item itemvalue="Python tests.Python tests for test_utils.test_transactions_total_sum" />
         <item itemvalue="Python tests.Python tests for test_views.test_main_page" />
@@ -158,12 +178,21 @@
       <option name="project" value="LOCAL" />
       <updated>1727699594998</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="'тесты для read_excel'">
+      <option name="closed" value="true" />
+      <created>1727713262018</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727713262018</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="'add skeleton'" />
     <MESSAGE value="'test_transactions_total_sum'" />
-    <option name="LAST_COMMIT_MESSAGE" value="'test_transactions_total_sum'" />
+    <MESSAGE value="'тесты для read_excel'" />
+    <option name="LAST_COMMIT_MESSAGE" value="'тесты для read_excel'" />
   </component>
 </project>

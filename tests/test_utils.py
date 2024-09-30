@@ -109,7 +109,7 @@ def test_read_excel_empty():
 
 
 def test_read_excel_good():
-    assert (read_excel('test_files/empty.xlsx') ==
+    assert (read_excel('test_files/good.xlsx') ==
             [
                 {
                     'operation_date': datetime.datetime(2021, 12, 31, 16, 44),
@@ -120,10 +120,10 @@ def test_read_excel_good():
                     'category': 'Супермаркеты',
                     'description': 'Колхоз',
                 }
-            ])
+            ]
+            )
 
 
 def test_read_is_not_excel():
-    with pytest.raises(FileNotFoundError) as f:
+    with pytest.raises(ValueError):
         transactions_total_sum(read_excel('test_files/operations.json'))
-        assert str(f.value) == 'AssertionError'
