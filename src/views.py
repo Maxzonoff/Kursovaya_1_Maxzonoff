@@ -25,6 +25,9 @@ def main_page(date: str) -> dict[str, str | list[dict]]:
         "greeting": greeting,
         "cards": transactions_total,
         "top_transactions": top_transactions,
+        "currency_rates": utils.get_exchange_rates(),
+        "stock_prices": utils.get_stock_prices(),
+
     }
     # return json.dumps(result, indent=4, encoding="utf-8")
     return result

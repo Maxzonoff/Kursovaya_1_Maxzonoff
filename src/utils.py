@@ -1,6 +1,9 @@
 import datetime
+import json
+import os
 from math import isnan
-
+import requests
+from dotenv import load_dotenv
 import pandas as pd
 
 
@@ -58,9 +61,6 @@ def read_excel(file_path: str) -> list[dict]:
     return transactions
 
 
-# print(read_excel('../data/operations.json'))
-
-
 def transactions_total_sum(transactions: list[dict]) -> list[dict]:
     total = {}
     for transaction in transactions:
@@ -85,9 +85,6 @@ def transactions_total_sum(transactions: list[dict]) -> list[dict]:
     return total_list
 
 
-# print(transactions_total_sum(read_excel('../tests/test_files/test_data.xlsx')))
-
-
 def top_transactions(transactions: list[dict]) -> list[dict]:
     sorted_transactions = sorted(transactions, key=lambda x: x["sum_pay"])
     result = sorted_transactions[:5]
@@ -102,3 +99,54 @@ def top_transactions(transactions: list[dict]) -> list[dict]:
             }
         )
     return top_trans
+
+
+def get_user_settings():
+    with open('../user_settings.json') as f:
+        return json.load(f)
+
+
+def get_exchange_rates():
+    load_dotenv()
+    api_key = os.getenv('APILAYER_API_KEY')
+    url = "https://api.apilayer.com/exchangerates_data/latest"
+
+    user_settings = get_user_settings()
+
+    currencies = ",".join(user_settings['user_currencies'])
+    headers = {'apikey': api_key}
+    params = {'base': 'RUB', 'symbols': currencies}
+    response = requests.get(url, params, headers=headers, timeout=5)
+
+    response.raise_for_status()
+    content = response.json()
+    currency_rates = []
+    for cur, rate in content['rates'].items():
+        currency_rates.append(
+            {
+                'currency': cur,
+                'rate': 1 / rate,
+            }
+        )
+    return currency_rates
+
+
+def get_stock_prices():
+    url = 'https://financialmodelingprep.com/api/v3/stock/list'
+    load_dotenv()
+    params = {'apikey': os.getenv('FMP_API_KEY')}
+    response = requests.get(url, params)
+
+    response.raise_for_status()
+    content = response.json()
+    stock_prices = []
+    user_settings = get_user_settings()
+    for stock in content:
+        if stock['symbol'] in user_settings['user_stocks']:
+            stock_prices.append(
+                {
+                    'stock': stock['symbol'],
+                    'price': stock['price'],
+                }
+            )
+    return stock_prices
