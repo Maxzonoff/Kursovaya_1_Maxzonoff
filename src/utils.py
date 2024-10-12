@@ -61,6 +61,9 @@ def read_excel(file_path: str) -> list[dict]:
     return transactions
 
 
+# print(read_excel('../data/operations.xlsx'))
+
+
 def transactions_total_sum(transactions: list[dict]) -> list[dict]:
     total = {}
     for transaction in transactions:

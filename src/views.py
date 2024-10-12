@@ -1,7 +1,8 @@
+import json
 from src import filters, utils
 
 
-def main_page(date: str) -> dict[str, str | list[dict]]:
+def main_page(date: str) -> str:
     """
     Функция возвращает данные для главной страницы в формате:
     словаря с ключами:
@@ -29,8 +30,8 @@ def main_page(date: str) -> dict[str, str | list[dict]]:
         "stock_prices": utils.get_stock_prices(),
 
     }
-    # return json.dumps(result, indent=4, encoding="utf-8")
-    return result
+    return json.dumps(result, ensure_ascii=False, indent=4)
+    # return result
 
 
 print(main_page("2021-12-28 13:29:30"))
