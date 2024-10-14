@@ -1,17 +1,24 @@
 import datetime
 import json
+import logging
 import os
 from math import isnan
 import requests
 from dotenv import load_dotenv
 import pandas as pd
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("../logs/log_file.log"),
+        logging.StreamHandler()
+    ]
+)
+
 
 def convert_to_datetime(date: str) -> datetime.datetime:
-    """
-    :param date: строка в формате - 'YYYY-MM-DD HH:MM:SS'
-    :return: datetime объект
-    """
+    """Функция преобразует строку даты в объект datetime."""
     dt_template = "%Y-%m-%d %H:%M:%S"
     dt = datetime.datetime.strptime(date, dt_template)
     return dt
@@ -58,13 +65,12 @@ def read_excel(file_path: str) -> list[dict]:
                 "description": str(raw_transaction["Описание"]),
             }
         )
+    logging.info(f"Прочитано {len(transactions)} транзакций из {file_path}")
     return transactions
 
 
-# print(read_excel('../data/operations.xlsx'))
-
-
 def transactions_total_sum(transactions: list[dict]) -> list[dict]:
+    """Функция возвращает сумму платежей по каждой карте."""
     total = {}
     for transaction in transactions:
         card_id = transaction["card_num"]
@@ -84,11 +90,12 @@ def transactions_total_sum(transactions: list[dict]) -> list[dict]:
                 "cashback": value["cash_back"],
             }
         )
-
+    logging.info("Сумма платежей по картам рассчитана.")
     return total_list
 
 
 def top_transactions(transactions: list[dict]) -> list[dict]:
+    """Функция возвращает топ-5 транзакций."""
     sorted_transactions = sorted(transactions, key=lambda x: x["sum_pay"])
     result = sorted_transactions[:5]
     top_trans = []
@@ -110,6 +117,7 @@ def get_user_settings():
 
 
 def get_exchange_rates():
+    """Функция получающая текущий курс валют."""
     load_dotenv()
     api_key = os.getenv('APILAYER_API_KEY')
     url = "https://api.apilayer.com/exchangerates_data/latest"
@@ -135,6 +143,7 @@ def get_exchange_rates():
 
 
 def get_stock_prices():
+    """Функция получающая стоимость акций из S&P500."""
     url = 'https://financialmodelingprep.com/api/v3/stock/list'
     load_dotenv()
     params = {'apikey': os.getenv('FMP_API_KEY')}
