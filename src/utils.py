@@ -1,20 +1,10 @@
 import datetime
 import json
-import logging
 import os
 from math import isnan
 import requests
 from dotenv import load_dotenv
 import pandas as pd
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("../logs/log_file.log"),
-        logging.StreamHandler()
-    ]
-)
 
 
 def convert_to_datetime(date: str) -> datetime.datetime:
@@ -65,7 +55,7 @@ def read_excel(file_path: str) -> list[dict]:
                 "description": str(raw_transaction["Описание"]),
             }
         )
-    logging.info(f"Прочитано {len(transactions)} транзакций из {file_path}")
+
     return transactions
 
 
@@ -90,7 +80,7 @@ def transactions_total_sum(transactions: list[dict]) -> list[dict]:
                 "cashback": value["cash_back"],
             }
         )
-    logging.info("Сумма платежей по картам рассчитана.")
+
     return total_list
 
 
