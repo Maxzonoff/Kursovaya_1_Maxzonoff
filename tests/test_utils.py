@@ -125,7 +125,3 @@ def test_read_excel_good():
 def test_read_is_not_excel():
     with pytest.raises(ValueError):
         transactions_total_sum(read_excel("test_files/operations.json"))
-
-
-# def test_read_excel(transaction):
-#     result =
